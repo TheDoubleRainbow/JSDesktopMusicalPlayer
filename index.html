@@ -32,10 +32,11 @@
     <div id="main">
       <div id="topbar">
         <div id="picDiv"><img id="pic" src="pic/track.jpg"></div>
-        <div id="playDiv"><img id="play" src="pic/play.png"></div>
-        <audio>
+        <div id="playDiv"><img @click="play" id="play" src="pic/play.png"></div>
+        <audio id="player">
           <source src="music/Suicide_Is_Painless.mp3" type="audio/mpeg">
         </audio>
+        {{currentTrack}}
       </div>
       <div id="mid">
         <div id="leftbar">
