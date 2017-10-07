@@ -3,10 +3,48 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <style type="text/css">
+      body{
+        background-color: #191919;
+        color: white;
+        padding: 0;
+        margin: 0 auto;
+      }
+      #main{
+        background-color: #191919;
+        width: 100%;
+      }
+      #pic{
+        width: 50px;
+        height: 50px;
+      }
+      #play{
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+      }
+      #picDiv, #playDiv{
+        display: inline-block;
+      }
+    </style>
   </head>
   <body>
     <div id="main">
-      <h1>{{currentTrack.name}}</h1>
+      <div id="topbar">
+        <div id="picDiv"><img id="pic" src="pic/track.jpg"></div>
+        <div id="playDiv"><img id="play" src="pic/play.png"></div>
+        <audio>
+          <source src="music/Suicide_Is_Painless.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div id="mid">
+        <div id="leftbar">
+          
+        </div> 
+        <div id="trackList">
+          
+        </div>
+      </div>
     </div>
     <script>
       require('./js/player.vue')
