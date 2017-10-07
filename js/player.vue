@@ -3,7 +3,7 @@ new Vue({
 	el: "#main",
 	data: {
 		tracks: ["New Pirate.mp3, Russian rock.mp3, Lolita.mp3"],
-		currentTrack: {name: "New Pirate.mp3", pic: "../pic/track.jpg"},
+		currentTrack: {name: "Suicide Is Painless", pic: "../pic/track.jpg"},
 		player: {
 			html: document.querySelector('#player'),
 			state: false,
