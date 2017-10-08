@@ -1,92 +1,185 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>JSDMP</title>
     <style type="text/css">
-      body{
+    body {
         font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
         background-color: #191919;
         color: white;
         padding: 0;
         margin: 0 auto;
-      }
-      #main{
+    }
+
+    #main {
         background-color: #191919;
         width: 100%;
-      }
-      #pic{
+    }
+
+    #pic {
         width: 54px;
         height: 50px;
         border-right: 3px solid red;
-      }
-      #play{
+    }
+
+    #play {
         margin-left: 0px;
         width: 50px;
         height: 50px;
-      }
-      #picDiv, #playDiv{
+    }
+
+    #picDiv,
+    #playDiv {
         display: inline-block;
-      }
-      .track{
+    }
+
+    .track {
         display: block;
-        vertical-align:bottom;
+        vertical-align: bottom;
         transition-duration: 0.3s;
         margin-bottom: 2px;
-      }
-      .track:hover{
+    }
+
+    .track:hover {
         color: #C70004;
-      }
-      #leftbar{
+    }
+
+    #leftbar {
         width: 50px;
         min-height: 100px;
         display: inline-block;
-      }
-      #trackList{
+    }
+
+    #trackList {
         display: inline-block;
-        vertical-align:top;
+        vertical-align: top;
         padding: 10px 10px 10px 10px;
         min-height: 150px;
         border-left: 3px solid red;
-      }
-      #topbar{
+    }
+
+    #topbar {
         height: 50px;
-      }
-      #mid{
+        background: red;
+    }
+
+    #mid {
         border-top: 3px solid red;
         height: 100%;
-      }
-      #currentTrack{
+    }
+
+    #currentTrack {
         width: 500px;
         position: relative;
         top: -50px;
         left: 120px;
-        color: red;
-      }
+        color: black;
+        z-index: 1;
+    }
+
+    #audioplayer {
+        position: absolute;
+        top: 0;
+        left: 60px;
+        width: 480px;
+        height: 50px;
+        z-index: 200;
+    }
+
+    #pButton {
+        height: 60px;
+        width: 60px;
+        border: none;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-top: -1px;
+        float: left;
+        outline: none;
+    }
+
+    .play {
+        background: url('http://www.alexkatz.me/codepen/img/play.png');
+    }
+
+    .pause {
+        background: url('http://www.alexkatz.me/codepen/img/pause.png');
+    }
+
+    #timeline {
+        width: 400px;
+        height: 16px;
+        margin-top: 25px;
+        float: left;
+        border-radius: 15px;
+        background: rgba(0, 0, 0, .3);
+    }
+
+    #playhead {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        margin-top: 1px;
+        background: rgba(0, 0, 0, 1);
+    }
+    #volume{
+      position: absolute;
+      left: 465px;
+      top: 25px;
+      width: 80px;
+    }
+    .volume{
+      width: 10px;
+      display: inline-block;
+      background: black;
+      margin-right: 0px;
+      height: 10px;
+      border-radius: 100%;
+    }
+    .volAlt{
+      background: rgba(0, 0, 0, .3);
+    }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="main">
-      <div id="topbar">
-        <div id="picDiv"><img id="pic" src="pic/track.jpg"></div>
-        <div id="playDiv"><img @click="play" id="play" src="pic/play.png"></div>
-        <audio id="player" :src="currentTrack.way">
-        </audio>
-        <div id="currentTrack"><marquee direction="right" behavior="scroll">{{currentTrack.name}}</marquee></div>
-      </div>
-      <div id="mid">
-        <div id="leftbar">
-          
-        </div> 
-        <div id="trackList">
-          <div v-for="track in tracks">
-            <div @click="setTrack(track)" class="track">{{track.name.substring(0,60)}}</div>
-          </div>
+        <div id="topbar">
+            <div id="picDiv"><img id="pic" src="pic/track.jpg"></div>
+            <audio :src="currentTrack.way" id="music" preload="true">
+            </audio>
+            <div id="audioplayer">
+                <button id="pButton" class="play"></button>
+                <div id="timeline">
+                    <div id="playhead"></div>
+                </div>
+                <div id="volume">
+                  <div class="volume" @click="player.volume = 0" onclick="music.volume = 0"></div>
+                  <div v-bind:class="{volAlt: player.volume < 0.25}" class="volume" @click="player.volume = 0.25" onclick="music.volume = 0.25"></div>
+                  <div v-bind:class="{volAlt: player.volume < 0.5}" class="volume"  @click="player.volume = 0.5" onclick="music.volume = 0.5"></div>
+                  <div v-bind:class="{volAlt: player.volume < 0.75}" class="volume"  @click="player.volume = 0.75" onclick="music.volume = 0.75"></div>
+                  <div v-bind:class="{volAlt: player.volume < 1}" class="volume"  @click="player.volume = 1" onclick="music.volume = 1"></div>
+                </div>
+            </div>
+            <div id="currentTrack">
+                <marquee direction="right" behavior="scroll">{{currentTrack.name}}</marquee>
+            </div>
         </div>
-      </div>
+        <div id="mid">
+            <div id="leftbar">
+            </div>
+            <div id="trackList">
+                <div v-for="track in tracks">
+                    <div @click="setTrack(track)" class="track">{{track.name.substring(0,60)}}</div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
-      require('./js/player.vue')
+    require('./js/player.vue')
     </script>
-  </body>
+</body>
+
 </html>

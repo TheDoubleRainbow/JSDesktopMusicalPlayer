@@ -8,7 +8,7 @@ new Vue({
 		tracks: [],
 		currentTrack: {},
 		player: {
-			state: false,
+			volume: 1
 		}
 	},
 	created: function(){
@@ -17,8 +17,8 @@ new Vue({
 	methods: {
 		setTrack: function(track){
 			this.currentTrack = track;
-			setTimeout(function(){document.getElementById("player").play()}, 1000)
-			console.log(this.tracks[0])
+			setTimeout(function(){document.getElementById("music").play()}, 1000)
+			music.paused = false;
 		},
 		getTracks: function(){
 			let that = this;
@@ -35,15 +35,7 @@ new Vue({
 				})
 			})
 		},
-		play: function(){
-			if(this.player.state){
-				document.getElementById("player").pause();
-				this.player.state = false;
-			}
-			else{
-				document.getElementById("player").play()
-				this.player.state = true;
-			}
-		}
 	}
 })
+
+require('./audioControls.js');
