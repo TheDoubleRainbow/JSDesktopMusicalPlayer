@@ -5,6 +5,7 @@
     <title>JSDMP</title>
     <style type="text/css">
       body{
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
         background-color: #191919;
         color: white;
         padding: 0;
@@ -15,11 +16,12 @@
         width: 100%;
       }
       #pic{
-        width: 50px;
+        width: 54px;
         height: 50px;
+        border-right: 3px solid red;
       }
       #play{
-        margin-left: 10px;
+        margin-left: 0px;
         width: 50px;
         height: 50px;
       }
@@ -28,6 +30,38 @@
       }
       .track{
         display: block;
+        vertical-align:bottom;
+        transition-duration: 0.3s;
+        margin-bottom: 2px;
+      }
+      .track:hover{
+        color: #C70004;
+      }
+      #leftbar{
+        width: 50px;
+        min-height: 100px;
+        display: inline-block;
+      }
+      #trackList{
+        display: inline-block;
+        vertical-align:top;
+        padding: 10px 10px 10px 10px;
+        min-height: 150px;
+        border-left: 3px solid red;
+      }
+      #topbar{
+        height: 50px;
+      }
+      #mid{
+        border-top: 3px solid red;
+        height: 100%;
+      }
+      #currentTrack{
+        width: 500px;
+        position: relative;
+        top: -50px;
+        left: 120px;
+        color: red;
       }
     </style>
   </head>
@@ -36,10 +70,9 @@
       <div id="topbar">
         <div id="picDiv"><img id="pic" src="pic/track.jpg"></div>
         <div id="playDiv"><img @click="play" id="play" src="pic/play.png"></div>
-        <audio id="player">
-          <source src="music/Suicide_Is_Painless.mp3" type="audio/mpeg">
+        <audio id="player" :src="currentTrack.way">
         </audio>
-        {{currentTrack.name}}
+        <div id="currentTrack"><marquee direction="right" behavior="scroll">{{currentTrack.name}}</marquee></div>
       </div>
       <div id="mid">
         <div id="leftbar">
@@ -47,7 +80,7 @@
         </div> 
         <div id="trackList">
           <div v-for="track in tracks">
-            <span class="track">{{track.name}}</span>
+            <div @click="setTrack(track)" class="track">{{track.name.substring(0,60)}}</div>
           </div>
         </div>
       </div>
