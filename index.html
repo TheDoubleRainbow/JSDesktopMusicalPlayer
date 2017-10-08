@@ -26,6 +26,9 @@
       #picDiv, #playDiv{
         display: inline-block;
       }
+      .track{
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -43,7 +46,9 @@
           
         </div> 
         <div id="trackList">
-          
+          <div v-for="track in tracks">
+            <span class="track">{{track.name}}</span>
+          </div>
         </div>
       </div>
     </div>
