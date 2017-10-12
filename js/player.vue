@@ -12,7 +12,7 @@ new Vue({
 		}
 	},
 	created: function(){
-		this.getTracks(true)
+		this.getTracks()
 	},
 	methods: {
 		setTrack: function(track){
@@ -23,8 +23,8 @@ new Vue({
 		getTracks: function(){
 			let that = this;
 			this.tracks = [];
-			glob("music/*.mp3", function (er, files) {
-				id3({ file: files[0], type: id3.OPEN_LOCAL }, function(err, tags) {
+			glob("music/*.mp3", function (er, files) { //Searching for files
+				id3({ file: files[0], type: id3.OPEN_LOCAL }, function(err, tags) { // getting id3 tags from mp3
     					that.currentTrack = {name: tags.artist + ' - ' + tags.title, genre: tags.v1.genre, way: files[0]};
 
 				});
@@ -38,4 +38,4 @@ new Vue({
 	}
 })
 
-require('./audioControls.js');
+require('./audioControls.js'); //player controls

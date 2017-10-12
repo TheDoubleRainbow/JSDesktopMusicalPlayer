@@ -11,6 +11,7 @@
         color: white;
         padding: 0;
         margin: 0 auto;
+        width: 620px;
     }
 
     #main {
@@ -71,10 +72,11 @@
     }
 
     #currentTrack {
-        width: 500px;
+        width: 420px;
         position: relative;
         top: -50px;
-        left: 120px;
+        left: 170px;
+        margin-right: 0;
         color: black;
         z-index: 1;
     }
@@ -89,8 +91,11 @@
     }
 
     #pButton {
-        height: 60px;
-        width: 60px;
+        position: absolute;
+        left: 25px;
+        top: 11px;
+        height: 40px;
+        width: 40px;
         border: none;
         background-size: 50% 50%;
         background-repeat: no-repeat;
@@ -109,9 +114,10 @@
     }
 
     #timeline {
-        width: 400px;
+        width: 350px;
         height: 16px;
         margin-top: 25px;
+        margin-left: 100px;
         float: left;
         border-radius: 15px;
         background: rgba(0, 0, 0, .3);
@@ -141,6 +147,20 @@
     .volAlt{
       background: rgba(0, 0, 0, .3);
     }
+    #next{
+      left: 55px;
+      top: 10px;
+      position: absolute;
+      border: none;
+      background: none;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+    }
+    #forwrd{
+      width: 30px;
+      height: 30px;
+    }
     </style>
 </head>
 
@@ -152,6 +172,7 @@
             </audio>
             <div id="audioplayer">
                 <button id="pButton" class="play"></button>
+                <button id="next"><img src="pic/forward.png" id="forwrd" /></button>
                 <div id="timeline">
                     <div id="playhead"></div>
                 </div>
@@ -178,7 +199,7 @@
         </div>
     </div>
     <script>
-    
+
     require('./js/player.vue')
     </script>
 </body>
