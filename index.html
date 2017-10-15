@@ -106,11 +106,11 @@
     }
 
     .play {
-        background: url('http://www.alexkatz.me/codepen/img/play.png');
+        background: url('pic/play.png');
     }
 
     .pause {
-        background: url('http://www.alexkatz.me/codepen/img/pause.png');
+        background: url('pic/pause.png');
     }
 
     #timeline {
@@ -130,36 +130,59 @@
         margin-top: 1px;
         background: rgba(0, 0, 0, 1);
     }
-    #volume{
-      position: absolute;
-      left: 465px;
-      top: 25px;
-      width: 80px;
+
+    #volume {
+        position: absolute;
+        left: 465px;
+        top: 25px;
+        width: 80px;
     }
-    .volume{
-      width: 10px;
-      display: inline-block;
-      background: black;
-      margin-right: 0px;
-      height: 10px;
-      border-radius: 100%;
+
+    .volume {
+        width: 10px;
+        display: inline-block;
+        background: black;
+        margin-right: 0px;
+        height: 10px;
+        border-radius: 100%;
     }
-    .volAlt{
-      background: rgba(0, 0, 0, .3);
+
+    .volAlt {
+        background: rgba(0, 0, 0, .3);
     }
-    #next{
-      left: 55px;
-      top: 10px;
-      position: absolute;
-      border: none;
-      background: none;
-      width: 40px;
-      height: 40px;
-      position: absolute;
+
+    #next {
+        left: 55px;
+        top: 11px;
+        position: absolute;
+        border: none;
+        background: none;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        outline: none;
     }
-    #forwrd{
-      width: 30px;
-      height: 30px;
+
+    #forwrd {
+        width: 23px;
+        height: 23px;
+    }
+
+    #prev {
+        left: -10px;
+        top: 11px;
+        position: absolute;
+        border: none;
+        background: none;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        outline: none;
+    }
+
+    #backwrd {
+        width: 23px;
+        height: 23px;
     }
     </style>
 </head>
@@ -171,17 +194,18 @@
             <audio :src="currentTrack.way" id="music" preload="true">
             </audio>
             <div id="audioplayer">
+                <button id="prev"><img src="pic/backward.png" id="backwrd" /></button>
                 <button id="pButton" class="play"></button>
-                <button id="next"><img src="pic/forward.png" id="forwrd" /></button>
+                <button id="next" @click="setTrack('next')"><img src="pic/forward.png" id="forwrd" /></button>
                 <div id="timeline">
                     <div id="playhead"></div>
                 </div>
                 <div id="volume">
-                  <div class="volume" @click="player.volume = 0" onclick="music.volume = 0"></div>
-                  <div v-bind:class="{volAlt: player.volume < 0.25}" class="volume" @click="player.volume = 0.25" onclick="music.volume = 0.25"></div>
-                  <div v-bind:class="{volAlt: player.volume < 0.5}" class="volume"  @click="player.volume = 0.5" onclick="music.volume = 0.5"></div>
-                  <div v-bind:class="{volAlt: player.volume < 0.75}" class="volume"  @click="player.volume = 0.75" onclick="music.volume = 0.75"></div>
-                  <div v-bind:class="{volAlt: player.volume < 1}" class="volume"  @click="player.volume = 1" onclick="music.volume = 1"></div>
+                    <div class="volume" @click="player.volume = 0" onclick="music.volume = 0"></div>
+                    <div v-bind:class="{volAlt: player.volume < 0.25}" class="volume" @click="player.volume = 0.25" onclick="music.volume = 0.25"></div>
+                    <div v-bind:class="{volAlt: player.volume < 0.5}" class="volume" @click="player.volume = 0.5" onclick="music.volume = 0.5"></div>
+                    <div v-bind:class="{volAlt: player.volume < 0.75}" class="volume" @click="player.volume = 0.75" onclick="music.volume = 0.75"></div>
+                    <div v-bind:class="{volAlt: player.volume < 1}" class="volume" @click="player.volume = 1" onclick="music.volume = 1"></div>
                 </div>
             </div>
             <div id="currentTrack">
@@ -199,7 +223,6 @@
         </div>
     </div>
     <script>
-
     require('./js/player.vue')
     </script>
 </body>
