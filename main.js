@@ -1,4 +1,4 @@
-const {app, contentTracing, BrowserWindow} = require('electron')
+const { app, contentTracing, BrowserWindow } = require('electron')
 
 const path = require('path')
 const url = require('url')
@@ -7,29 +7,33 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
-  mainWindow = new BrowserWindow({width: 620, height: 250})
-  //mainWindow.webContents.openDevTools();
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-  mainWindow.on('closed', function () {
-    mainWindow = null
-  })
+function createWindow() {
+    mainWindow = new BrowserWindow({ width: 620, height: 230 })
+    mainWindow.on('resize', function(e) {
+        e.preventDefault();
+        mainWindow.setContentSize(620, 230);
+    });
+    //mainWindow.webContents.openDevTools();
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
+    mainWindow.on('closed', function() {
+        mainWindow = null
+    })
 }
 app.on('ready', () => {
-  createWindow()
+    createWindow()
 })
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+app.on('window-all-closed', function() {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
 
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow()
-  }
+app.on('activate', function() {
+    if (mainWindow === null) {
+        createWindow()
+    }
 })
