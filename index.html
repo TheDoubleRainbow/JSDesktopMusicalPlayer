@@ -194,7 +194,7 @@
             <audio :src="currentTrack.way" id="music" preload="true">
             </audio>
             <div id="audioplayer">
-                <button id="prev"><img src="pic/backward.png" id="backwrd" /></button>
+                <button id="prev" @click="setTrack('prev')"><img src="pic/backward.png" id="backwrd" /></button>
                 <button id="pButton" class="play"></button>
                 <button id="next" @click="setTrack('next')"><img src="pic/forward.png" id="forwrd" /></button>
                 <div id="timeline">

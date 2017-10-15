@@ -16,11 +16,19 @@ new Vue({
     },
     methods: {
         setTrack: function(track) {
-            if (track == "next") {
+        	if (track == "prev") {
+                if (this.tracks[this.tracks.indexOf(this.currentTrack) - 1]) {
+                	console.log(this.tracks[this.tracks.indexOf(this.currentTrack) - 1])
+                    this.currentTrack = this.tracks[this.tracks.indexOf(this.currentTrack) - 1];
+                } else {
+                    console.log("Next track does not exist")
+                }
+            }
+            else if (track == "next") {
+            	console.log(this.tracks)
                 if (this.tracks[this.tracks.indexOf(this.currentTrack) + 1]) {
                 	console.log(this.tracks[this.tracks.indexOf(this.currentTrack) + 1])
                     this.currentTrack = this.tracks[this.tracks.indexOf(this.currentTrack) + 1];
-                    setTimeout(function() { document.getElementById("music").play() }, 1000)
                 } else {
                     console.log("Next track does not exist")
                 }

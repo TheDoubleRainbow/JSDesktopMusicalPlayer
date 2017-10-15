@@ -9,7 +9,7 @@ let mainWindow
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 620, height: 250})
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
